@@ -31,7 +31,7 @@ router.post("/", async (req, res) => {
     newComment.createdAt = new Date()
     newComment.updatedAt = newComment.createdAt
     newComment.ID = idGen.generate()
-    reviews.push(newComment)
+    comments.push(newComment)
     await saveComments(comments)
 
     res.send(newComment)
@@ -39,16 +39,16 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
     var comments = await getComments();
-    var oldComments = comments.find(x => x.ID == req.params.id)
+    var oldComment = comments.find(x => x.ID == req.params.id)
     req.body.updatedAt = new Date();
     delete req.body.ID;
     delete req.body.createdAt;
 
-    Object.assign(oldComments, req.body)
+    Object.assign(oldComment, req.body)
 
     await saveComments(comments)
 
-    res.send(oldComments)
+    res.send(oldComment)
 })
 
 router.delete("/:id", async (req, res) => {

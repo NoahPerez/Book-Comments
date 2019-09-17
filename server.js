@@ -10,7 +10,7 @@ server.use(bodyParser.json())
 server.use(cors())
 
 server.use("/books", bookRouter)
-server.use("/books", commentRouter)
+server.use("/comments", commentRouter)
 
 server.use(cors())
 
